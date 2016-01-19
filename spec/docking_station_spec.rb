@@ -22,7 +22,8 @@ describe DockingStation do
     it "Docks the bike when the bike is returned" do
       ds = DockingStation.new
       bike = ds.release_bike
-      expect(ds.dock_bike(bike)).to
+      num_of_bikes = ds.bikes.length
+      expect(ds.dock_bike(bike)).to eq num_of_bikes + 1
     end
 
 end
