@@ -28,23 +28,23 @@ describe DockingStation do
 
     it 'docks a bike' do
       bike = Bike.new
-      expect(subject.dock(bike)).to eq(bike)
+      expect(subject.dock(bike)).to include(bike)
     end
 
     it 'raises an error when there are too many bikes' do
       bike = Bike.new
-      subject.dock(bike)
+      20.times {subject.dock(bike)}
       expect {subject.dock(bike)}. to raise_error 'Too many bikes'
     end
   end
 
-  it {is_expected.to respond_to(:bikes)}
+  it {is_expected.to respond_to(:bikes_array)}
 
 
   it 'can see a bike' do
     bike = Bike.new
     subject.dock(bike)
-    expect((subject.bikes)).to an_instance_of Bike
+    expect((subject.bikes_array)).to include(bike)
   end
 
 
