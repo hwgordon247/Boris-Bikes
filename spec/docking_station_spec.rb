@@ -3,25 +3,18 @@ require "bike"
 
 describe DockingStation do
 
-  it "Does not release a bike if none are available." do
-    ds = DockingStation.new
-    bike = Bike.new
-    expect {ds.release_bike}.to raise_error("No bikes are available.")
-  end
 
   it "Docks the bike when the bike is returned" do
     ds = DockingStation.new
-    bike = Bike.new
+    bike = ds.release_bike
     num_of_bikes = ds.bikes.length
     expect(ds.dock_bike(bike)).to eq num_of_bikes + 1
   end
 
-=begin
   it "Gets a bike." do
     ds = DockingStation.new
-    bike = Bike.new
-    ds.dock_bike(bike)
     bike = ds.release_bike
+    ds.dock_bike(bike)
     expect(bike).to be_instance_of Bike
   end
 
@@ -30,19 +23,16 @@ describe DockingStation do
     bike = ds.release_bike
     expect(bike.working?).to be_truthy
   end
-=end
+
 
   it "Can the Docking station Dock bikes" do
     ds = DockingStation.new
-    bike = Bike.new
     expect(ds.respond_to?(:dock_bike)).to eq true
   end
 
-  it "Shows bikes are available" do
+  it "Does not release a bike if none are available." do
     ds = DockingStation.new
-    bike = ds.release_bike
-    ds.dock_bike(bike)
-    expect(ds.bikes_available?).to be_false
+    expect {ds.release_bike}.to raise_error("No bikes are available.")
   end
 
 end

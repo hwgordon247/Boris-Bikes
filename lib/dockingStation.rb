@@ -1,19 +1,16 @@
 class DockingStation
   attr_reader :bikes
 
-  def bikes
-    @bikes = []
+  def initialize(bikes = [])
+    @bikes = bikes
   end
 
-  def bikes_available?
-    @bikes.length > 0
-  end
 
   def release_bike
-    if bikes_available?
-      Bike.new
-    else
+    if bikes.empty?
       raise "No bikes are available."
+    else
+      Bike.new
     end
   end
 
