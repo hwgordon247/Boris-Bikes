@@ -1,6 +1,9 @@
 README for Boris Bikes.
 
-AUTHORS: VIOLA, MARION, JOE
+LICENSE: 	This project is licensed under the terms of the MIT license. 
+		See LICENSE.md
+
+AUTHORS: 	VIOLA CRELLIN, MARION LE VISAGE, JOE WROE
 
 This project is work in progress. The README file will be updated with:
 
@@ -9,4 +12,4 @@ This project is work in progress. The README file will be updated with:
 * How to install and use the program.
 * Known bugs. 
 
-Contact: viola.crellin@gmail.com
+CONTACT: 	viola.crellin@gmail.com
