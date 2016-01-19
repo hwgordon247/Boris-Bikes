@@ -1,3 +1,3 @@
-describe "Docking Station" do
+describe DockingStation do
     
 end
