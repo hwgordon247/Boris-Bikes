@@ -13,7 +13,11 @@ class DockingStation
   end
 
   def dock(bike)
-    @bike = bike
+    if @bike.nil?
+      @bike = bike
+    else
+      raise Exception.new("Docking Station Full")
+    end
   end
 
   def bike
