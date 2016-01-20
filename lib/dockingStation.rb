@@ -11,7 +11,7 @@ class DockingStation
   end
 
   def dock_bike(bike)
-    fail "Dock is full" if bikes.length > 0
+    fail "Dock is full" if bikes.length > 19
     bikes << bike
   end
 
