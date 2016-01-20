@@ -50,9 +50,14 @@ describe DockingStation do
   it "Doesn't release a broken bike" do
     bike = Bike.new
     subject.dock_bike(bike, true)
-    expect(subject.release_bike).to be_a Hash
+    expect(subject.release_bike).to eq nil
   end
 
+  it 'releases working bikes' do
+    subject.dock_bike double(:bike)
+    bike = subject.release_bike
+    expect(bike).to be_working
+  end
 
 
 end

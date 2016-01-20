@@ -10,12 +10,15 @@ class DockingStation
 
   def release_bike
     raise "No bikes are available." if empty?
+    current_bike = nil
     bikes.each do |k, v|
       if v == false
+        current_bike = k
         bikes.delete(k)
         break
       end
     end
+    current_bike
   end
 
   def dock_bike(bike, faulty = false)
