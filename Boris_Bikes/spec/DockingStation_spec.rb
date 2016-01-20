@@ -9,6 +9,9 @@ describe DockingStation do
   end
 
   context 'responds to "dock" with one argument'
-    it { is_expected.to respond_to(:dock).with(1).argument }
+    it { is_expected.to respond_to(:dock).with(1).argument}
+
+  context 'responds to "bike"'
+    it { is_expected.to respond_to(:bike)}
 
 end
