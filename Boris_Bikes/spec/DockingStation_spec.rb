@@ -7,7 +7,7 @@ describe DockingStation do
 
   it 'raises error "Docking Station Full" when docking station capacity is reached' do
     20.times {subject.dock(Bike.new)} #GUARD CONDITION
-    expect {subject.dock Bike.new }.to raise_error("Docking Station Full")
+    expect {subject.full? }.to raise_error("Docking station full")
   end
 
   context 'responds to "dock" with one argument'

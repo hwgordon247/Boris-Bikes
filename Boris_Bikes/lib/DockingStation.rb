@@ -8,20 +8,24 @@ attr_reader :bike
     @bikes = []
   end
 
-  def release_bike
-    if @bikes.empty?
+  def release_bike   # Doing 2 things
+    if @bikes.empty?   # => Defining the capacity
       raise Exception.new("No Bikes Available")
     else
-      @bikes.pop
+      @bikes.pop    # => Removing a bike
     end
   end
 
-  def dock(potato)
-    if @bikes.size >= 20
-      raise Exception.new("Docking Station Full")
+  def dock(potato)   # Doing 2 things
+    if self.full?
+      Exception.new("Docking station full")
     else
-      @bikes << potato
+       @bikes << potato
     end
+  end
+
+  def full?
+    @bikes.size >= 20 ? true : false   # => Defining the capacity
   end
 
 end
