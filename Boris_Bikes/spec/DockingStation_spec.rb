@@ -6,7 +6,7 @@ describe DockingStation do
   it { should respond_to(:release_bike) }
 
   it 'raises error "Docking Station Full" when docking station capacity is reached' do
-    subject.dock(Bike.new)
+    20.times {subject.dock(Bike.new)} #GUARD CONDITION
     expect {subject.dock Bike.new }.to raise_error("Docking Station Full")
   end
 
@@ -18,8 +18,8 @@ describe DockingStation do
 
   describe '#release_bike' do
     it 'expects "release_bike" to get a working bike' do
-      bike = Bike.new
-      subject.dock(bike)
+      bike = Bike.new #GUARD CONDITION
+      subject.dock(bike) #GUARD CONTION
       expect(subject.release_bike).to eq bike
     end
 
@@ -27,5 +27,4 @@ describe DockingStation do
       expect { subject.release_bike }.to raise_error("No Bikes Available")
     end
   end
-
 end
