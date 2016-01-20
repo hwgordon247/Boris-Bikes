@@ -23,7 +23,6 @@ describe DockingStation do
   end
 
   it "Does not release a bike if none are available." do
-    subject.bikes.pop
     expect {subject.release_bike}.to raise_error("No bikes are available.")
   end
 
@@ -45,9 +44,15 @@ describe DockingStation do
 
   it "the user reports a bike is broken to the docking station" do
     bike = Bike.new
-
     expect(subject.dock_bike(bike,true)).to be_truthy
-
   end
+
+  it "Doesn't release a broken bike" do
+    bike = Bike.new
+    subject.dock_bike(bike, true)
+    expect(subject.release_bike).to be_a Hash
+  end
+
+
 
 end
