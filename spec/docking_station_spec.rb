@@ -3,14 +3,15 @@ require "bike"
 
 describe DockingStation do
 
+  let(:bike) { double :bike }
+
   it "Gets a bike." do
     bike = Bike.new
-    subject.dock_bike(bike)
     expect(bike).to be_instance_of Bike
   end
 
   it "Expects the bike to be working." do
-    bike = Bike.new
+    allow(bike).to receive(:working?).and_return(true)
     expect(bike.working?).to be_truthy
   end
 
@@ -27,8 +28,7 @@ describe DockingStation do
   end
 
   it "You can't dock a bike if there's 20 bikes in the station" do
-    DockingStation::DEFAULT_CAPACITY.times { subject.dock_bike Bike.new }
-    bike = Bike.new
+    DockingStation::DEFAULT_CAPACITY.times {|i| subject.dock_bike(i += 1) }
     expect {subject.dock_bike(bike)}.to raise_error "Dock is full"
   end
 
@@ -43,18 +43,18 @@ describe DockingStation do
   end
 
   it "the user reports a bike is broken to the docking station" do
-    bike = Bike.new
     expect(subject.dock_bike(bike,true)).to be_truthy
   end
 
   it "Doesn't release a broken bike" do
-    bike = Bike.new
     subject.dock_bike(bike, true)
     expect(subject.release_bike).to eq nil
   end
 
+
   it 'releases working bikes' do
-    subject.dock_bike double(:bike)
+    allow(bike).to receive(:working?).and_return(true)
+    subject.dock_bike(bike)
     bike = subject.release_bike
     expect(bike).to be_working
   end
