@@ -43,4 +43,11 @@ describe DockingStation do
     expect(ds.capacity).to eq 20
   end
 
+  it "the user reports a bike is broken to the docking station" do
+    bike = Bike.new
+
+    expect(subject.dock_bike(bike,true)).to be_truthy
+
+  end
+
 end
