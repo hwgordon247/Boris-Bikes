@@ -10,6 +10,7 @@ describe DockingStation do
 	expect(bike).to be_working
 	end
 
+	context "responds to 'dock' with one argument" 
 	it {is_expected.to respond_to(:dock).with(1).argument}
 
 end
