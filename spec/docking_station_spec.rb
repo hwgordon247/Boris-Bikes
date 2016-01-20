@@ -33,4 +33,14 @@ describe DockingStation do
     expect {subject.dock_bike(bike)}.to raise_error "Dock is full"
   end
 
+  it "Allows the user to set a default bike capacity" do
+    ds = DockingStation.new(30)
+    expect(ds).to be_instance_of DockingStation
+  end
+
+  it "Defaults to 20 bikes when no arguments passed" do
+    ds = DockingStation.new
+    expect(ds.capacity).to eq 20
+  end
+
 end
