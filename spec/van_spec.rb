@@ -31,7 +31,24 @@ describe Van do
     bikes_to_fix = subject.collect_broken(@ds)
     subject.delivers_broken(garage)
     expect(subject.collect_fixed(garage)).to eq bikes_to_fix
-
   end
 
+  it 'fixed bike is docked to the station again' do
+    garage = Garage.new
+    subject.collect_broken(@ds)
+    subject.delivers_broken(garage)
+    subject.collect_fixed(garage)
+    subject.delivers_fixed(@ds)
+    expect(@ds.bikes).to include @bike
+    expect(@ds.bikes).to include @bike2
+  end
+
+  it 'is empty after delivering fixed bikes to docking station' do
+    garage = Garage.new
+    subject.collect_broken(@ds)
+    subject.delivers_broken(garage)
+    subject.collect_fixed(garage)
+    subject.delivers_fixed(@ds)
+    expect(subject.fixed_bikes).to be_empty
+  end
 end

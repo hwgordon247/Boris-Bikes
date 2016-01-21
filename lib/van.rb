@@ -18,4 +18,10 @@ class Van
     @fixed_bikes
   end
 
+  def delivers_fixed(station)
+    @fixed_bikes.each do |x|
+      station.dock_bike(x, true)
+    end
+    @fixed_bikes = []
+  end
 end
