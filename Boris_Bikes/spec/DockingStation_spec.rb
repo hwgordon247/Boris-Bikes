@@ -3,20 +3,10 @@ require 'DockingStation'
 describe DockingStation do
   subject(:DockingStation) {described_class.new}
 
-  it { should respond_to(:release_bike) }
-
-  it 'raises error "Docking Station Full" when docking station capacity is reached' do
-    DockingStation::DEFAULT_CAPACITY.times { subject.dock(Bike.new) } #GUARD CONDITION
-    expect { subject.dock(Bike.new) }.to raise_error("Docking Station Full")
-  end
-
-  context 'responds to "dock" with one argument'
-    it { is_expected.to respond_to(:dock).with(1).argument}
-
-  context 'responds to "bike"'
-    it { is_expected.to respond_to(:bikes)}
-
   describe '#capacity' do
+
+    context 'responds to "bike"'
+      it { is_expected.to respond_to(:bikes)}
 
     it 'expects DEFAULT_CAPACITY to equal 20' do
       expect( DockingStation::DEFAULT_CAPACITY ).to eq 20
@@ -39,6 +29,8 @@ describe DockingStation do
 
   describe '#release_bike' do
 
+      it { should respond_to(:release_bike) }
+
     it 'expects "release_bike" to get a working bike' do
       bike = Bike.new #GUARD CONDITION
       subject.dock(bike) #GUARD CONTION
@@ -47,6 +39,24 @@ describe DockingStation do
 
     it 'raises error "No Bikes Available" when docking station is empty' do
       expect { subject.release_bike }.to raise_error("No Bikes Available")
+    end
+
+  end
+
+  describe '#return_bike' do
+
+    it 'raises error "Docking Station Full" when docking station capacity is reached' do
+      DockingStation::DEFAULT_CAPACITY.times { subject.dock(Bike.new) } #GUARD CONDITION
+      expect { subject.dock(Bike.new) }.to raise_error("Docking Station Full")
+    end
+
+    context 'responds to "dock" with one argument'
+      it { is_expected.to respond_to(:dock).with(1).argument}
+
+
+    it 'expects to see if bike is broken' do
+      bike = Bike.new #GUARD CONDITION
+      expect(bike.working?).to eq false
     end
   end
 end
