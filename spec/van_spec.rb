@@ -25,4 +25,12 @@ describe Van do
     expect(subject.delivers_broken(garage)).to be_empty
   end
 
+  it 'collects fixed bikes from the garage' do
+    garage = Garage.new
+    bikes_to_fix = subject.collect_broken(ds)
+    subject.delivers_broken(garage)
+    expect(subject.collect_fixed(garage)).to eq bikes_to_fix
+
+  end
+
 end

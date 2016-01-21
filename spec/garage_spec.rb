@@ -15,4 +15,10 @@ describe Garage do
     expect(subject.broken_bikes).to eq broken
   end
 
+  it 'is empty after the van collects' do
+    van.delivers_broken(subject)
+    van.collect_fixed(subject)
+    expect(subject.broken_bikes).to be_empty
+  end
+
 end

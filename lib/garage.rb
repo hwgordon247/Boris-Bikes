@@ -7,4 +7,10 @@ class Garage
     @broken_bikes = broken_bikes
   end
 
+  def return_fixed
+    fixed_bikes = @broken_bikes
+    @broken_bikes = []
+    fixed_bikes
+  end
+
 end
