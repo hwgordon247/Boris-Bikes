@@ -26,6 +26,16 @@ class DockingStation
     @bikes
   end
 
+  def removal
+    broken_bikes = []
+    @bikes.each {|k,v|
+      broken_bikes << k unless v
+    }
+    #broken_bikes.each{|x| @bikes.delete(x)}
+    @bikes.delete_if{|k,v| v == false}
+    broken_bikes
+  end
+
   private
     def full?
       @bikes.size >= @capacity
