@@ -29,8 +29,6 @@ describe DockingStation do
 
   describe '#release_bike' do
 
-      it { should respond_to(:release_bike) }
-
     it 'expects "release_bike" to get a working bike' do
       bike = Bike.new #GUARD CONDITION
       subject.dock(bike) #GUARD CONTION
@@ -53,10 +51,5 @@ describe DockingStation do
     context 'responds to "dock" with one argument'
       it { is_expected.to respond_to(:dock).with(1).argument}
 
-
-    it 'expects to see if bike is broken' do
-      bike = Bike.new #GUARD CONDITION
-      expect(bike.working?).to eq false
-    end
   end
 end
