@@ -9,6 +9,7 @@ class Garage
 
   def return_fixed
     fixed_bikes = @broken_bikes
+    fixed_bikes.each {|bike| bike.report_fixed}
     @broken_bikes = []
     fixed_bikes
   end

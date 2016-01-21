@@ -55,12 +55,15 @@ describe DockingStation do
   end
 
   it 'a user can report a broken bike when it is docked' do
+    allow(bike).to receive(:report_broken).and_return(false)
     expect(subject.dock_bike(bike, false)).to include bike
   end
 
   it 'docking station only releases working bikes' do
+    allow(bike).to receive(:report_broken).and_return(false)
     bike2 = double(:bike2)
     bike3 = double(:bike3)
+    allow(bike3).to receive(:report_broken).and_return(false)
     subject.dock_bike(bike, false)
     subject.dock_bike(bike2)
     subject.dock_bike(bike3, false)
