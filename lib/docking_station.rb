@@ -6,18 +6,24 @@ class DockingStation
 
 # dockingstation assumes to have no bikes
   def initialize(capacity=DEFAULT_CAPACITY)
-    @bikes = []
+    @bikes = {}
     @capacity = capacity
   end
 
   def release_bike
     raise "No bikes available!" if empty?
-    @bikes.pop
+    current_bike = nil
+    @bikes.each { |k,working|
+      current_bike = k; break if working
+    }
+    @bikes.delete(current_bike)
+    current_bike
   end
 
-  def dock_bike(bike)
+  def dock_bike(bike, working = true)
     raise "Station is full!" if full?
-    @bikes << bike
+    @bikes[bike] = working
+    @bikes
   end
 
   private

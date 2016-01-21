@@ -53,4 +53,19 @@ describe DockingStation do
     expect(DockingStation.new(30).capacity).to eq 30
   end
 
+  it 'a user can report a broken bike when it is docked' do
+    bike = Bike.new
+    expect(subject.dock_bike(bike, false)).to include bike
+  end
+
+  it 'docking station only releases working bikes' do
+    bike = Bike.new
+    bike2 = Bike.new
+    bike3 = Bike.new
+    subject.dock_bike(bike, false)
+    subject.dock_bike(bike2)
+    subject.dock_bike(bike3, false)
+    expect(subject.release_bike).to eq bike2
+  end
+
 end
