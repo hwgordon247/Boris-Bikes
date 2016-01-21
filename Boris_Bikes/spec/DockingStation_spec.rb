@@ -16,11 +16,29 @@ describe DockingStation do
   context 'responds to "bike"'
     it { is_expected.to respond_to(:bike)}
 
-    it 'expects DEFAULT_CAPACITY to equal 20 unless a user states otherwise' do
+  describe '#capacity' do
+
+    it 'expects DEFAULT_CAPACITY to equal 20' do
       expect( DockingStation::DEFAULT_CAPACITY ).to eq 20
     end
 
+    it 'expects "DEFAULT_CAPACITY" to change to a random user request' do
+      while true
+        capacity = rand(999)
+        if capacity == 20
+          true
+        else
+          break
+        end
+      end
+      new_DockingStation_class = DockingStation.new(capacity)
+      expect( new_DockingStation_class.capacity ).not_to eq 20
+    end
+
+  end
+
   describe '#release_bike' do
+
     it 'expects "release_bike" to get a working bike' do
       bike = Bike.new #GUARD CONDITION
       subject.dock(bike) #GUARD CONTION
