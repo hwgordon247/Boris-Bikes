@@ -1,12 +1,14 @@
 require 'docking_station'
 
 describe DockingStation do
+  let(:bike) { double :bike }
 
   it { is_expected.to respond_to(:release_bike) }
 
-  it 'check if bike is working' do
-    bike = Bike.new
-    expect(bike.working?).to eq true
+  it 'check if released bike is working' do
+    subject.dock_bike(bike)
+    allow(bike).to receive(:working?).and_return(true)
+    expect(subject.release_bike).to be_working
   end
 
   it { is_expected.to respond_to(:dock_bike).with(1).argument }
@@ -14,18 +16,15 @@ describe DockingStation do
   it { is_expected.to respond_to(:bikes) }
 
   it 'dock bike' do
-    bike = Bike.new
     expect(subject.dock_bike(bike)).to include bike
   end
 
   it 'check the same bike exists' do
-    bike = Bike.new
     subject.dock_bike(bike)
     expect(subject.bikes).to include bike
   end
 
   it 'release a bike when it is available' do
-    bike = Bike.new
     subject.dock_bike(bike)
     expect(subject.release_bike).to eq bike
   end
@@ -35,14 +34,16 @@ describe DockingStation do
   end
 
   it 'raise an error when station is full' do
-    DockingStation::DEFAULT_CAPACITY.times { subject.dock_bike(Bike.new) }
-    expect { subject.dock_bike(Bike.new) }.to raise_error("Station is full!")
+    i = 0
+    DockingStation::DEFAULT_CAPACITY.times { subject.dock_bike(i+=1) }
+    expect { subject.dock_bike(bike) }.to raise_error("Station is full!")
   end
 
   it 'specify a large capacity when necessary' do
+    i = 0
     station = DockingStation.new(30)
-    30.times { station.dock_bike(Bike.new)}
-    expect { station.dock_bike(Bike.new) }.to raise_error("Station is full!")
+    30.times { station.dock_bike(i+=1)}
+    expect { station.dock_bike(bike) }.to raise_error("Station is full!")
   end
 
   it 'checks the default capacity is 20' do
@@ -54,14 +55,12 @@ describe DockingStation do
   end
 
   it 'a user can report a broken bike when it is docked' do
-    bike = Bike.new
     expect(subject.dock_bike(bike, false)).to include bike
   end
 
   it 'docking station only releases working bikes' do
-    bike = Bike.new
-    bike2 = Bike.new
-    bike3 = Bike.new
+    bike2 = double(:bike2)
+    bike3 = double(:bike3)
     subject.dock_bike(bike, false)
     subject.dock_bike(bike2)
     subject.dock_bike(bike3, false)
