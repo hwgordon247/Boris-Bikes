@@ -6,8 +6,8 @@ describe DockingStation do
   it { should respond_to(:release_bike) }
 
   it 'raises error "Docking Station Full" when docking station capacity is reached' do
-    20.times {subject.dock(Bike.new)} #GUARD CONDITION
-    expect { subject.full? == true }.to raise_error("Docking station full")
+    DockingStation::DEFAULT_CAPACITY.times { subject.dock(Bike.new) } #GUARD CONDITION
+    expect { subject.dock(Bike.new) }.to raise_error("Docking Station Full")
   end
 
   context 'responds to "dock" with one argument'
@@ -25,6 +25,10 @@ describe DockingStation do
 
     it 'raises error "No Bikes Available" when docking station is empty' do
       expect { subject.release_bike }.to raise_error("No Bikes Available")
+    end
+
+    it 'Sets DEFAULT_CAPACITY to 20 unless a user specifies a different capacity' do
+      
     end
   end
 end

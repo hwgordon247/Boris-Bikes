@@ -3,6 +3,7 @@ require_relative 'Bike'
 class DockingStation
 
 attr_reader :bike
+DEFAULT_CAPACITY = 20
 
   def initialize
     @bikes = []
@@ -17,15 +18,17 @@ attr_reader :bike
   end
 
   def dock(potato)   # Doing 2 things
-    if self.full?
-      Exception.new("Docking station full")
+    if full? == true
+      raise Exception.new("Docking Station Full")
     else
        @bikes << potato
     end
   end
 
+  private
+
   def full?
-    @bikes.size >= 20 ? true : false   # => Defining the capacity
+    @bikes.size >= DEFAULT_CAPACITY ? true : false   # => Defining the capacity
   end
 
 end
