@@ -16,6 +16,10 @@ describe DockingStation do
   context 'responds to "bike"'
     it { is_expected.to respond_to(:bike)}
 
+    it 'expects DEFAULT_CAPACITY to equal 20 unless a user states otherwise' do
+      expect( DockingStation::DEFAULT_CAPACITY ).to eq 20
+    end
+
   describe '#release_bike' do
     it 'expects "release_bike" to get a working bike' do
       bike = Bike.new #GUARD CONDITION
@@ -25,10 +29,6 @@ describe DockingStation do
 
     it 'raises error "No Bikes Available" when docking station is empty' do
       expect { subject.release_bike }.to raise_error("No Bikes Available")
-    end
-
-    it 'Sets DEFAULT_CAPACITY to 20 unless a user specifies a different capacity' do
-      
     end
   end
 end
