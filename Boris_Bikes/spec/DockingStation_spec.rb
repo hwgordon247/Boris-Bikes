@@ -14,7 +14,7 @@ describe DockingStation do
     it { is_expected.to respond_to(:dock).with(1).argument}
 
   context 'responds to "bike"'
-    it { is_expected.to respond_to(:bike)}
+    it { is_expected.to respond_to(:bikes)}
 
   describe '#capacity' do
 
