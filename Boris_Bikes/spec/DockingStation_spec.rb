@@ -29,14 +29,21 @@ describe DockingStation do
 
   describe '#release_bike' do
 
-    it 'expects "release_bike" to get a working bike' do
-      bike = Bike.new #GUARD CONDITION
-      subject.dock(bike) #GUARD CONTION
+    it 'expects "release_bike" to get bike' do
+      bike = Bike.new #GUARD
+      subject.dock(bike) #GUARD
       expect(subject.release_bike).to eq bike
     end
 
     it 'raises error "No Bikes Available" when docking station is empty' do
       expect { subject.release_bike }.to raise_error("No Bikes Available")
+    end
+
+    it 'raises error "No working bikes." when there are no working bikes' do
+      bike = Bike.new #GAURD
+      bike.report_broken #GUARD
+      subject.dock(bike) #GAURD
+      expect { subject.release_bike }.to raise_error("No working bikes.")
     end
 
   end
