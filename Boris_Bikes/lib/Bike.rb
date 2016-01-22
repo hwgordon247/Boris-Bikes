@@ -1,4 +1,5 @@
 class Bike
+  #hello
 
   attr_writer :broken
   def initialize
