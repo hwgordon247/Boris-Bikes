@@ -46,6 +46,13 @@ describe DockingStation do
       expect { subject.release_bike }.to raise_error("No working bikes.")
     end
 
+    it 'knows when a working bike has been removed from the docking station' do
+      bike = Bike.new
+      subject.dock(bike)
+      subject.release_bike
+      expect(subject.bikes).to eq []
+    end
+
   end
 
   describe '#return_bike' do
